@@ -3,29 +3,6 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     ports:
-      - "3000:3000"
-    volumes:
-      - /home/node/app/node_modules
-      - .:/home/node/app
-  tests:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    volumes:
-      - /home/node/app/node_modules
-      - .:/home/node/app
-    command: ["npm", "run", "test"]
-
-
-
-# note:
-# sử dụng docker-compose để chạy container thay vì phải chạy 1 lệnh dài:
-  # mục đích: bất kì thay đổi nào trên local, nó cũng tự động mount trực tiếp vào trong container
-
-  # sudo docker run -p 3000:3000 -v /home/node/app/node_modules -v $(pwd):/home/node/app 0bd219eccb4810bbe924e
-
-  # -v /home/node/app/node_modules: Mount thư mục node_modules từ container vào máy host. Thư mục node_modules thường chứa các thư viện và module mà ứng dụng của bạn sử dụng. Bằng cách này, bạn giữ các thư viện này ổn định và không thay đổi khi container chạy. Nếu không sử dụng lệnh này, Docker sẽ tạo ra một thư mục node_modules mới và ghi đè lên thư mục này trong container, có thể tạo ra các vấn đề không mong muốn.
-
-  # -v $(pwd):/home/node/app: Mount thư mục làm việc hiện tại của máy host vào thư mục /home/node/app trong container. Điều này giúp bạn có thể phát triển và chỉnh sửa mã nguồn của ứng dụng từ máy host và thay đổi sẽ được áp dụng ngay lập tức trong container.
+      - '80:80'
